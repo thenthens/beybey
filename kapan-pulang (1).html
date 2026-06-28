@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kapan Pulang App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* ── Phone Shell ── */
+    .phone {
+      width: 390px;
+      height: 844px;
+      background: #fce8e8;
+      border-radius: 48px;
+      box-shadow:
+        0 0 0 10px #1a1a1a,
+        0 30px 80px rgba(0,0,0,0.35);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── Screens ── */
+    .screen {
+      position: absolute;
+      inset: 0;
+      background: #fce8e8;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 36px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .screen.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ── Typography ── */
+    .screen-title {
+      font-size: 26px;
+      font-weight: 900;
+      color: #1a1a1a;
+      text-align: center;
+      line-height: 1.35;
+      margin-bottom: 40px;
+      letter-spacing: -0.3px;
+    }
+
+    /* Screen 4 title is uppercase + bigger */
+    .screen-title.home {
+      font-size: 28px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ── BACK Button ── */
+    .btn-back {
+      background: #f06b6b;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 18px 0;
+      width: 200px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .btn-back:hover  { background: #e85959; }
+    .btn-back:active { transform: scale(0.97); background: #d44; }
+
+    /* ── 2×2 Grid Buttons (Home screen) ── */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      width: 260px;
+    }
+
+    .btn-nav {
+      background: #f06b6b;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 22px 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .btn-nav:hover  { background: #e85959; }
+    .btn-nav:active { transform: scale(0.96); background: #d44; }
+
+    /* ── Responsive ── */
+    @media (max-width: 430px) {
+      .phone {
+        width: 100%;
+        height: 100svh;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      body { padding: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="phone">
+
+  <!-- Screen HOME — shown first -->
+  <div class="screen active" id="screen-home">
+    <p class="screen-title home">HALOOO BEY</p>
+    <div class="grid">
+      <button class="btn-nav" onclick="goTo('screen-1')">1</button>
+      <button class="btn-nav" onclick="goTo('screen-2')">2</button>
+      <button class="btn-nav" onclick="goTo('screen-3')">3</button>
+      <button class="btn-nav" onclick="goTo('screen-4')">4</button>
+    </div>
+  </div>
+
+  <!-- Screen 1 — Kapan Pulang -->
+  <div class="screen" id="screen-1">
+    <p class="screen-title">Kapan Pulang</p>
+    <button class="btn-back" onclick="goTo('screen-home')">BACK</button>
+  </div>
+
+  <!-- Screen 2 — masih sakit ga perutnya? -->
+  <div class="screen" id="screen-2">
+    <p class="screen-title">masih sakit ga perutnya?</p>
+    <button class="btn-back" onclick="goTo('screen-home')">BACK</button>
+  </div>
+
+  <!-- Screen 3 — aku bingung mo nulis apa lagi -->
+  <div class="screen" id="screen-3">
+    <p class="screen-title">aku bingung mo nulis apa lagi</p>
+    <button class="btn-back" onclick="goTo('screen-home')">BACK</button>
+  </div>
+
+  <!-- Screen 4 — hi lagi bey -->
+  <div class="screen" id="screen-4">
+    <p class="screen-title">hi lagi bey</p>
+    <button class="btn-back" onclick="goTo('screen-home')">BACK</button>
+  </div>
+
+</div>
+
+<script>
+  function goTo(id) {
+    document.querySelectorAll('.screen').forEach(s => {
+      s.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
